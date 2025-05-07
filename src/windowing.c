@@ -6,7 +6,6 @@
 #include "help.h"
 #include "sound.h"
 #include "utils.h"
-#include <CommCtrl.h>
 
 static WCHAR CheatPassword[] = L"XYZZY";
 #define WINMINE_HELP L"winmine.hlp"
@@ -612,7 +611,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
     return DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-__inline BOOL MenuHandler(WORD menuItem) {
+BOOL MenuHandler(WORD menuItem) {
 
     if (menuItem >= ID_MENUITEM_BEGINNER && menuItem <= ID_MENUITEM_EXPERT) {
         GameConfig.Difficulty = LOWORD(menuItem - ID_MENUITEM_BEGINNER);
@@ -696,7 +695,7 @@ __inline BOOL MenuHandler(WORD menuItem) {
 }
 
 
-__inline void KeyDownHandler(WPARAM wParam) {
+void KeyDownHandler(WPARAM wParam) {
     switch (wParam) {
     case VK_SHIFT:
         if (CheatPasswordIndex >= 5) {
@@ -737,7 +736,7 @@ __inline void KeyDownHandler(WPARAM wParam) {
     }
 }
 
-__inline LRESULT CaptureMouseInput(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+LRESULT CaptureMouseInput(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     // Shared code...
     SetCapture(hWnd);
     ClickedBlock = (BoardPoint) { -1, -1 };
@@ -746,7 +745,7 @@ __inline LRESULT CaptureMouseInput(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
     return MouseMoveHandler(hwnd, uMsg, wParam, lParam);
 }
 
-__inline LRESULT MouseMoveHandler(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+LRESULT MouseMoveHandler(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     // WM_MOUSEMOVE_Handler!
     if (!HasMouseCapture) {
         if (CheatPasswordIndex == 0) {
@@ -883,7 +882,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 void CustomFieldDialogBox() {
     DialogBoxParamW(hModule, (LPCWSTR)ID_DIALOG_CUSTOM_FIELD, hWnd, CustomFieldDialogProc, 0);
     GameConfig.Difficulty = 3;
-    // WIERD: Unconditionally change the difficulty to 3...
+    // WEIRD: Unconditionally change the difficulty to 3...
     InitializeCheckedMenuItems();
     NeedToSaveConfigToRegistry = TRUE;
 }

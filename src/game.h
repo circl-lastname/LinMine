@@ -1,5 +1,4 @@
 #pragma once
-#include <Windows.h>
 
 // Variables
 //
@@ -70,7 +69,7 @@ extern BYTE BlockArray[27][32];
 #define ACCESS_BLOCK(point) (BlockArray[point.Row][point.Column])
 
 BOOL InitializeBitmapsAndBlockArray();
-__inline BOOL IsInBoardRange(BoardPoint point);
+BOOL IsInBoardRange(BoardPoint point);
 void ChangeBlockState(BoardPoint point, BYTE blockState);
 void InitializeBlockArrayBorders();
 int CountNearBombs(BoardPoint point);
@@ -81,9 +80,9 @@ void ExpandEmptyBlock(BoardPoint point);
 DWORD GetFlagBlocksCount(BoardPoint point);
 void UpdateBlockStateToClicked(BoardPoint point);
 void UpdateBlockStateToUnclicked(BoardPoint point);
-__inline VOID UpdateClickedBlocksState3x3(BoardPoint newClick, BoardPoint oldClick);
-__inline VOID UpdateClickedBlocksStateNormal(BoardPoint point, BoardPoint oldClick);
-__inline void ReleaseBlocksClick();
+VOID UpdateClickedBlocksState3x3(BoardPoint newClick, BoardPoint oldClick);
+VOID UpdateClickedBlocksStateNormal(BoardPoint point, BoardPoint oldClick);
+void ReleaseBlocksClick();
 void ReleaseMouseCapture(); // inline
 void UpdateClickedBlocksState(BoardPoint point);
 void NotifyMinimize();

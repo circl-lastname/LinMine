@@ -1,5 +1,4 @@
 #pragma once
-#include <Windows.h>
 
 
 // Variables
@@ -39,10 +38,10 @@ void CustomFieldDialogBox();
 void ShowWinnerNameAndTime(HWND hDlg, int nIDDlgItem, int secondsLeft, LPCWSTR lpName);
 void WinnersDialogBox();
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-__inline BOOL MenuHandler(WORD menuItem);
-__inline void KeyDownHandler(WPARAM wParam);
-__inline LRESULT CaptureMouseInput(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-__inline LRESULT MouseMoveHandler(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+BOOL MenuHandler(WORD menuItem);
+void KeyDownHandler(WPARAM wParam);
+LRESULT CaptureMouseInput(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+LRESULT MouseMoveHandler(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow);
 
 void SetMenuItemState(DWORD uID, BOOL isChecked);

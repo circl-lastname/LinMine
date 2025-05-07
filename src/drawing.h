@@ -1,5 +1,4 @@
 #pragma once
-#include <Windows.h>
 
 #define SMILE_NORMAL 0
 #define SMILE_WOW    1
@@ -11,12 +10,12 @@
 HRSRC FindBitmapResource(USHORT resourceId);
 int GetBitmapByteLength(int a, int b);
 BOOL LoadBitmaps();
-__inline BOOL LoadBitmapResources();
-__inline HGLOBAL TryLoadBitmapResource(USHORT resourceId);
-__inline void InitializeBitmapsIndexes();
-__inline void InitializeBitmapIndexes(PDWORD indexesArray, int numberOfBitmaps, DWORD firstBitmapIndex, DWORD bytesPerBitmap);
-__inline void InitializePen();
-__inline void ProcessBlockBitmaps();
+BOOL LoadBitmapResources();
+HGLOBAL TryLoadBitmapResource(USHORT resourceId);
+void InitializeBitmapsIndexes();
+void InitializeBitmapIndexes(PDWORD indexesArray, int numberOfBitmaps, DWORD firstBitmapIndex, DWORD bytesPerBitmap);
+void InitializePen();
+void ProcessBlockBitmaps();
 
 void FreePenAndBlocks();
 void FreePenAndBlocksAndSound();

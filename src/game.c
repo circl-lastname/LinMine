@@ -48,7 +48,7 @@ BOOL InitializeBitmapsAndBlockArray() {
     return FALSE;
 }
 
-__inline void ReverseMemSet(PBYTE buffer, BYTE value, DWORD size) {
+void ReverseMemSet(PBYTE buffer, BYTE value, DWORD size) {
     do {
         size--;
         buffer[size] = value;
@@ -171,11 +171,11 @@ DWORD GetFlagBlocksCount(BoardPoint point) {
 
 
 
-__inline BOOL IsInBoardRange(BoardPoint point) {
+BOOL IsInBoardRange(BoardPoint point) {
     return point.Column > 0 && point.Row > 0 && point.Column <= Width && point.Row <= Height;
 }
 
-__inline VOID UpdateClickedBlocksStateNormal(BoardPoint newClick, BoardPoint oldClick) {
+VOID UpdateClickedBlocksStateNormal(BoardPoint newClick, BoardPoint oldClick) {
     if (IsInBoardRange(oldClick) && (ACCESS_BLOCK(oldClick) & BLOCK_IS_REVEALED) == 0) {
         UpdateBlockStateToUnclicked(oldClick);
         DrawBlock(oldClick);
@@ -191,7 +191,7 @@ __inline VOID UpdateClickedBlocksStateNormal(BoardPoint newClick, BoardPoint old
     }
 }
 
-__inline VOID UpdateClickedBlocksState3x3(BoardPoint newClick, BoardPoint oldClick) {
+VOID UpdateClickedBlocksState3x3(BoardPoint newClick, BoardPoint oldClick) {
     BOOL isNewLocationInBounds = IsInBoardRange(newClick);
     BOOL isOldLocationInBounds = IsInBoardRange(oldClick);
 
@@ -208,7 +208,7 @@ __inline VOID UpdateClickedBlocksState3x3(BoardPoint newClick, BoardPoint oldCli
     int leftColumn = max(1, newClick.Column - 1);
     int rightColumn = min(Width, newClick.Column + 1);
 
-    // Change old to unclicked. WIERD: Missing bounds check
+    // Change old to unclicked. WEIRD: Missing bounds check
     for (int loop_row = oldTopRow; loop_row <= oldBottomRow; loop_row++) {
         for (int loop_column = oldLeftColumn; loop_column <= oldRightColumn; ++loop_column) {
             if ((BlockArray[loop_row][loop_column] & BLOCK_IS_REVEALED) == 0) {
@@ -246,7 +246,7 @@ __inline VOID UpdateClickedBlocksState3x3(BoardPoint newClick, BoardPoint oldCli
     }
 }
 
-__inline void ReleaseBlocksClick() {
+void ReleaseBlocksClick() {
     UpdateClickedBlocksState((BoardPoint) { -2, -2 });
 }
 
@@ -440,7 +440,7 @@ void HandleBlockClick() {
         }
 
         if (!(StateFlags & STATE_GAME_IS_ON)) {
-            // WIERD: Setting this to -2, -2 causes buffer overflow
+            // WEIRD: Setting this to -2, -2 causes buffer overflow
             ClickedBlock = (BoardPoint) { -2, -2 };
         }
 
@@ -448,7 +448,7 @@ void HandleBlockClick() {
             Handle3x3BlockClick(ClickedBlock);
         }
         else {
-            // WIERD: The buffer overflow occurs here
+            // WEIRD: The buffer overflow occurs here
             // ClickedBlock might be (-2, -2)
             BYTE blockValue = ACCESS_BLOCK(ClickedBlock);
 
@@ -541,11 +541,11 @@ void ChangeBlockState(BoardPoint point, BYTE blockState) {
     DrawBlock(point);
 }
 
-__inline void ReplaceFirstNonBomb(BoardPoint point, PBYTE pFunctionBlock) {
+void ReplaceFirstNonBomb(BoardPoint point, PBYTE pFunctionBlock) {
     // The first block! Change a normal block to a bomb, 
     // Replace the current block into an empty block
     // Reveal the current block
-    // WIERD: LOOP IS WITHOUT AN EQUAL SIGN
+    // WEIRD: LOOP IS WITHOUT AN EQUAL SIGN
     for (int current_row = 1; current_row < Height; ++current_row) {
         for (int current_column = 1; current_column < Width; ++current_column) {
             PBYTE pLoopBlock = &BlockArray[current_row][current_column];

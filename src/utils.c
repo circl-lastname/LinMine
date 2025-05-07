@@ -1,4 +1,3 @@
-#include <Windows.h>
 #include "windowing.h"
 #include "resource.h"
 

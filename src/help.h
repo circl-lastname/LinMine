@@ -1,5 +1,4 @@
 #pragma once
-#include <Windows.h>
 
 // Help Window Functions
 void ShowAboutWindow();

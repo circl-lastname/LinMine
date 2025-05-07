@@ -1,4 +1,3 @@
-#include <Windows.h>
 #include "config.h"
 #include "windowing.h"
 #include "game.h"
@@ -70,7 +69,7 @@ BOOL LoadBitmaps() {
     return TRUE;
 }
 
-__inline void InitializePen() {
+void InitializePen() {
     if (GameConfig.Color) {
         hPen = CreatePen(PS_SOLID, 1, RGB(128, 128, 128));
     }
@@ -79,7 +78,7 @@ __inline void InitializePen() {
     }
 }
 
-__inline void ProcessBlockBitmaps() {
+void ProcessBlockBitmaps() {
     HDC hWndDC = GetDC(hWnd);
 
     for (int i = 0; i < _countof(BlockStates); ++i) {
@@ -107,12 +106,12 @@ __inline void ProcessBlockBitmaps() {
     ReleaseDC(hWnd, hWndDC);
 }
 
-__inline BOOL LoadBitmapResources() {
+BOOL LoadBitmapResources() {
     hBlocksBitmapResource = TryLoadBitmapResource(ID_BITMAP_BLOCK);
     hNumbersBitmapResource = TryLoadBitmapResource(ID_BITMAP_NUMBERS);
     hSmilesBitmapResource = TryLoadBitmapResource(ID_BITMAP_SMILES);
 
-    // Yea I know, it's wierd that the check is performed after all the resources are loaded..
+    // Yea I know, it's weird that the check is performed after all the resources are loaded..
     if (hSmilesBitmapResource == NULL || hBlocksBitmapResource == NULL || hNumbersBitmapResource == NULL) {
         return FALSE;
     }
@@ -124,7 +123,7 @@ __inline BOOL LoadBitmapResources() {
     return TRUE;
 }
 
-__inline void InitializeBitmapsIndexes() {
+void InitializeBitmapsIndexes() {
 #define COLORED_BMP_START 104
 #define NONCOLORED_BMP_START 48
 
@@ -152,14 +151,14 @@ __inline void InitializeBitmapsIndexes() {
     );
 }
 
-__inline void InitializeBitmapIndexes(PDWORD indexesArray, int numberOfBitmaps, DWORD firstBitmapIndex, DWORD bytesPerBitmap) {
+void InitializeBitmapIndexes(PDWORD indexesArray, int numberOfBitmaps, DWORD firstBitmapIndex, DWORD bytesPerBitmap) {
     for (int i = 0; i < numberOfBitmaps; ++i) {
         indexesArray[i] = firstBitmapIndex;
         firstBitmapIndex += bytesPerBitmap;
     }
 }
 
-__inline HGLOBAL TryLoadBitmapResource(USHORT resourceId) {
+HGLOBAL TryLoadBitmapResource(USHORT resourceId) {
     HRSRC hRsrc = FindBitmapResource(resourceId);
 
     if (hRsrc != NULL) {
