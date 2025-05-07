@@ -1,4 +1,4 @@
-#include <Windows.h>
+#include "windows.h"
 #include "config.h"
 #include "windowing.h"
 #include "game.h"
@@ -112,7 +112,7 @@ __inline BOOL LoadBitmapResources() {
     hNumbersBitmapResource = TryLoadBitmapResource(ID_BITMAP_NUMBERS);
     hSmilesBitmapResource = TryLoadBitmapResource(ID_BITMAP_SMILES);
 
-    // Yea I know, it's wierd that the check is performed after all the resources are loaded..
+    // Yea I know, it's weird that the check is performed after all the resources are loaded..
     if (hSmilesBitmapResource == NULL || hBlocksBitmapResource == NULL || hNumbersBitmapResource == NULL) {
         return FALSE;
     }

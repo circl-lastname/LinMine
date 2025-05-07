@@ -883,7 +883,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 void CustomFieldDialogBox() {
     DialogBoxParamW(hModule, (LPCWSTR)ID_DIALOG_CUSTOM_FIELD, hWnd, CustomFieldDialogProc, 0);
     GameConfig.Difficulty = 3;
-    // WIERD: Unconditionally change the difficulty to 3...
+    // WEIRD: Unconditionally change the difficulty to 3...
     InitializeCheckedMenuItems();
     NeedToSaveConfigToRegistry = TRUE;
 }

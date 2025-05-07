@@ -83,7 +83,7 @@ void DisplayHelpWindow(HWND hDesktopWnd, LPCSTR lpChmFilename, UINT uCommand, DW
             }
         }
 
-        // WIERD!
+        // WEIRD!
         // Using HtmlHelpW with ascii instead of unicode filename???
         HtmlHelpWPtr(hDesktopWnd, (LPCWSTR)lpChmFilename, uCommand, dwData);
     }
@@ -93,7 +93,7 @@ void ShowHelpHtml(DWORD arg0, UINT uCommand) {
     CHAR ChmFilename[250];
 
     if (arg0 == 4) {
-        // WIERD: Missing NULL Terminator
+        // WEIRD: Missing NULL Terminator
         memcpy(ChmFilename, "NTHelp.chm", 10);
     }
     else {
@@ -108,7 +108,7 @@ void ShowHelpHtml(DWORD arg0, UINT uCommand) {
             copyDest = lastCharPointer - 3;
         }
 
-        // WIERD: Buffer overflow copying ".chm"
+        // WEIRD: Buffer overflow copying ".chm"
         memcpy(copyDest, ".chm", 4);
     }
 

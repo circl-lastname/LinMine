@@ -1,5 +1,5 @@
 #pragma once
-#include <Windows.h>
+#include "windows.h"
 
 #define SMILE_NORMAL 0
 #define SMILE_WOW    1

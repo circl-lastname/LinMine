@@ -1,5 +1,5 @@
 #pragma once
-#include <Windows.h>
+#include "windows.h"
 
 // Misc
 int GetRandom(DWORD maxValue);

@@ -1,5 +1,5 @@
 #pragma once
-#include <Windows.h>
+#include "windows.h"
 
 #define SOUND_ON 3
 #define SOUNDTYPE_TICK 1
