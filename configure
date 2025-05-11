@@ -1,0 +1,57 @@
+#!/bin/sh
+set -e
+
+generate_ninja () {
+  /bin/echo -n > build.ninja
+  
+cat << EOF >> build.ninja
+rule cc
+  command = $CC -c \$in -O2 $(sdl2-config --cflags) -MD -MF \$out.d -o \$out
+  depfile = \$out.d
+  description = Compiling C object \$out
+
+rule ld
+  command = $CC \$in -s $(sdl2-config --libs) -o \$out
+  description = Linking executable \$out
+
+rule cc_bin2h
+  command = $CC \$in -s -O2 -MD -MF \$out.d -o \$out
+  depfile = \$out.d
+  description = Compiling executable \$out
+
+rule bin2h
+  command = build/bin2h \$\$(basename \$in .bmp) < \$in > \$out
+  description = Converting to C file \$out
+
+build build/bin2h: cc_bin2h src/bin2h/bin2h.c
+
+build build/blocks.c: bin2h res/blocks.bmp | build/bin2h
+build build/blocks.o: cc build/blocks.c
+
+build build/button.c: bin2h res/button.bmp | build/bin2h
+build build/button.o: cc build/button.c
+
+build build/led.c: bin2h res/led.bmp | build/bin2h
+build build/led.o: cc build/led.c
+EOF
+  
+  cd src
+  files=$(echo *.c)
+  cd ..
+  
+  objects=
+  
+  for file in $files; do
+    object="build/$(echo $file | sed "s/\\.c$/.o/")"
+    objects="$objects$object "
+    
+    echo "build $object: cc src/$file" >> build.ninja
+  done
+  
+  echo "build bin/linmine: ld ${objects}build/blocks.o build/button.o build/led.o" >> build.ninja
+  
+  echo "default bin/linmine" >> build.ninja
+}
+
+CC=${CC:-gcc}
+generate_ninja
